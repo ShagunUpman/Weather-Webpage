@@ -13,8 +13,11 @@ async function getWeather() {
         let data = await response.json();
 
         if (data.cod === 200) {
-            document.getElementById("temperature").innerText = 
-                `Temperature in ${city}: ${data.main.temp}°C`;
+            let temp = data.main.temp;
+            document.getElementById("temperature").innerText = `Temperature in ${city}: ${temp}°C`;
+            
+            // Change background based on temperature
+            changeBackground(temp);
         } else {
             document.getElementById("temperature").innerText = "City not found!";
         }
@@ -22,3 +25,19 @@ async function getWeather() {
         console.error(error);
     }
 }
+
+function changeBackground(temp) {
+    let body = document.body;
+    if (temp > 35) {
+        body.style.backgroundImage = "url('summer.jpg')";
+    } else if (temp >= 15 && temp <= 35) {
+        body.style.backgroundImage = "url('normal.jpg')";
+    } else if (temp > 0 && temp < 15) {
+        body.style.backgroundImage = "url('cold.jpg')";
+    } else {
+        body.style.backgroundImage = "url('snow.jpg')";
+    }
+    body.style.backgroundSize = "cover";
+    body.style.backgroundPosition = "center";
+}
+
