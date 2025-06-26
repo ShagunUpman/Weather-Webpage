@@ -1,28 +1,32 @@
 async function getWeather() {
-    let city = document.getElementById("cityInput").value;  
+    let city = document.getElementById("cityInput").value.trim();  
     if (city === "") {
         alert("Please enter a city name");
         return;
     }
 
-    let apiKey = "fa6ca55bfc9247e2915d89de7d45f4c9";  // Get a free API key from OpenWeatherMap
+    let apiKey = "fa6ca55bfc9247e2915d89de7d45f4c9";
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     try {
         let response = await fetch(url);
-        let data = await response.json();
 
-        if (data.cod === 200) {
-            let temp = data.main.temp;
-            document.getElementById("temperature").innerText = `Temperature in ${city}: ${temp}°C`;
-            
-            // Change background based on temperature
-            changeBackground(temp);
-        } else {
-            document.getElementById("temperature").innerText = "City not found!";
+        if (!response.ok) {
+            throw new Error("City not found");
         }
+
+        let data = await response.json();
+        let temp = data.main.temp;
+        let description = data.weather[0].description;
+
+        document.getElementById("temperature").innerText = `Temperature in ${city}: ${temp}°C`;
+        document.getElementById("description").innerText = `Condition: ${description}`;
+
+        changeBackground(temp);
     } catch (error) {
-        console.error(error);
+        document.getElementById("temperature").innerText = "";
+        document.getElementById("description").innerText = error.message;
+        console.error("Error fetching weather:", error);
     }
 }
 
