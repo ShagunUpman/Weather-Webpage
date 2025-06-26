@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('image.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9); /* Slight transparency for a softer look */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Flex container for input and button */
+.input-container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #4CAF50; /* Soft green border */
+    border-radius: 6px;
+    outline: none;
+    font-size: 16px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #4CAF50; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #388E3C; /* Darker green on hover */
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #2E7D32;
+    transform: scale(0.98);
+}
+
+@media (max-width: 500px) {
+    .container {
+        margin: 10px;
+        padding: 20px;
+    }
+
+    .input-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    input, button {
+        width: 100%;
+    }
+}
